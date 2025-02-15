@@ -1,4 +1,4 @@
-# **Edu Resources**
+# **Study Space**
 
 A full-stack MERN application that helps developers share and discover educational resources. Users can authenticate with Google, create, manage, and explore various types of educational content including books, courses, videos, and more.
 
@@ -7,7 +7,6 @@ Made for educators to share valuable coding tools, guides, and materials, and fo
 
 ![](assets/20250106_032040_image.png)
 
-### *Edu Resources is now live [here](https://eduresources.site/)!*
 
 ## **Features**
 
@@ -69,7 +68,7 @@ You'll also need:
 
 ### 1. Clone the repository
 
-`git clone https://github.com/jolyssa/edu-resources.git`
+`https://github.com/zaryabnaqvi/studyspace-FE`
 
 ### 2. Install dependencies
 
