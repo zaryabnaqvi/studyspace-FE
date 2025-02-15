@@ -1,0 +1,64 @@
+@import "https://fonts.googleapis.com/css?family=VT323";
+
+@import "https://fonts.googleapis.com/css?family=VT323";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.notFound body,
+.notFound h1,
+.notFound h2,
+.notFound h3,
+.notFound h4,
+.notFound p,
+.notFound a {
+  @apply text-[#e0e2f4];
+}
+.notFound body,
+.notFound p {
+  font: normal 20px/1.25rem "VT323", monospace;
+}
+.notFound h1 {
+  font: normal 2.75rem/1.05em "VT323", monospace;
+}
+.notFound h2 {
+  font: normal 2.25rem/1.25em "VT323", monospace;
+}
+.notFound h3 {
+  font: lighter 1.5rem/1.25em "VT323", monospace;
+}
+.notFound h4 {
+  font: lighter 1.125rem/1.2222222em "VT323", monospace;
+}
+ .notFoundDiv {
+  background: #ef4444;
+}
+.container-nfp {
+  @apply w-[90%] max-w-screen-sm m-auto;
+}
+.bsod {
+  @apply pt-[10%];
+}
+.bsod .neg {
+  @apply text-center text-[#ef4444];
+}
+.bsod .neg .bg {
+  @apply pl-[13px] pr-[15px] pt-0 pb-0.5;
+  background: #aaa;
+}
+.bsod .title {
+  @apply mb-[50px];
+}
+.bsod .nav {
+  @apply text-center mt-[35px];
+}
+.bsod .nav .link {
+  @apply no-underline pl-2 pr-[9px] pt-0 pb-0.5;
+}
+.bsod .nav .link:hover,
+.bsod .nav .link:focus {
+  @apply text-[#ef4444];
+  background: #aaa;
+}

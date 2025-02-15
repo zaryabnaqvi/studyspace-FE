@@ -1,0 +1,147 @@
+{
+  "resources": [
+    {
+      "id": "1",
+      "title": "Tech Interview Cheat Sheet",
+      "type": "Repository",
+      "level": "Intermediate",
+      "description": "This list is meant to be both a quick guide and reference for further research into these topics. It's basically a summary of that comp sci course you never took or forgot about, so there's no way it can cover everything in depth.",
+      "createdBy": "tsiege",
+      "info": {
+        "category": "Career Development",
+        "link": "https://github.com/tsiege/Tech-Interview-Cheat-Sheet",
+        "published": "2019"
+      }
+    },
+    {
+      "id": "2",
+      "title": "Free For Dev",
+      "type": "Repository",
+      "level": "Everyone",
+      "description": "Developers and Open Source creators now have many services offering free tiers, but finding them all takes time to make informed decisions. This is a list of software (SaaS, PaaS, IaaS, etc.) and other offerings with free developer tiers. The scope of this particular list is limited to things that infrastructure developers (System Administrator, DevOps Practitioners, etc.) are likely to find useful. We love all the free services out there, but it would be good to keep it on topic. It's a grey line sometimes, so this is opinionated; please don't feel offended if I don't accept your contribution. This list results from Pull Requests, reviews, ideas, and work done by 1600+ people. You can also help by sending Pull Requests to add more services or remove ones whose offerings have changed or been retired.",
+      "createdBy": "ripienaar",
+      "info": {
+        "category": "General Skills",
+        "link": "https://github.com/ripienaar/free-for-dev",
+        "published": "2019"
+      }
+    },
+    {
+      "id": "3",
+      "title": "Tech Interview Handbook",
+      "type": "Website",
+      "description": "Tech Interview Handbook goes straight to the point and tells you the minimum you need to know to excel in your technical interviews. Having personally gone through the interviewing process, it was frustrating to have to find resources from everywhere to prepare for my technical interviews. This handbook contains the essence of technical interviewing I gathered over my last job hunt, which allowed me to clinch 9 offers out of 11 top Bay Area companies - Google, Airbnb, Palantir, Dropbox, Lyft, and some startups! A senior Netflix engineer used Tech Interview Handbook and got 7 offers from 7 companies with the top offer being $800k USD 🤯!",
+      "level": "Everyone",
+      "createdBy": "Yangshun Tay",
+      "info": {
+        "category": "Career Development",
+        "link": "https://www.techinterviewhandbook.org/",
+        "published": "N/A"
+      }
+    },
+    {
+      "id": "4",
+      "title": "Node.js Basics",
+      "type": "Website",
+      "description": "Node.js is an open-source server side runtime environment built on Chrome's V8 JavaScript engine. It provides an event driven, non-blocking (asynchronous) I/O and cross-platform runtime environment for building highly scalable server-side applications using JavaScript. Learn more about Node.js here!",
+      "level": "Beginner",
+      "createdBy": "Pradeep Kumar",
+      "info": {
+        "category": "Web Development",
+        "link": "https://learning-zone.github.io/nodejs-basics/",
+        "published": "2019"
+      }
+    },
+    {
+      "id": "5",
+      "title": "Flexbox Guide",
+      "type": "Website",
+      "description": "⚡ A Guide for the concept of Flexbox and responsive design. Simply set the attributes as you needed and copy the CSS code. 🎉",
+      "level": "Beginner",
+      "createdBy": "Sourav Dey",
+      "info": {
+        "category": "Web Development",
+        "link": "https://flexbox-guide-souravdey777.vercel.app/",
+        "published": "2020"
+      }
+    },
+    {
+      "id": "6",
+      "title": "Website Templates",
+      "type": "Repository",
+      "level": "Everyone",
+      "description": "Find the perfect website template for you in this list of over 150+ resources at your disposal.",
+      "createdBy": "learning-zone",
+      "info": {
+        "category": "Web Development",
+        "link": "https://github.com/learning-zone/website-templates",
+        "published": "2018"
+      }
+    },
+    {
+      "id": "7",
+      "title": "API Layer",
+      "type": "Website",
+      "description": "A collective list of free API's.",
+      "level": "Everyone",
+      "createdBy": "public-apis",
+      "info": {
+        "category": "Web Development",
+        "link": "https://apilayer.com/",
+        "published": "2017"
+      }
+    },
+    {
+      "id": "8",
+      "title": "JavaScript Algorithms and Data Structures",
+      "type": "Repository",
+      "description": "📝 Algorithms and data structures implemented in JavaScript with explanations and links to further readings",
+      "level": "Beginner",
+      "createdBy": "trekhleb",
+      "info": {
+        "category": "Data Structures and Algorithms",
+        "link": "https://github.com/trekhleb/javascript-algorithms",
+        "published": "2018"
+      }
+    },
+    {
+      "id": "9",
+      "title": "Frontend Handbook",
+      "type": "Repository",
+      "level": "Everyone",
+      "description": "This is a practical guide that anyone can use to learn front-end. It outlines and discusses the practice of front-end engineering: how to learn it and what tools to use when practicing it. The purpose of writing this manual is twofold: first, to provide a professional resource including learning materials and development tools for potential and practicing front-end developers; second, the manual can be used by managers, CTOs, instructors, and headhunters as an insight into the practice of front-end development. The content of this manual supports web technologies (HTML, CSS, DOM, and JavaScript), and the solutions provided in the manual are directly built on these open technologies. The materials and discussions cited in the manual are the best or current problems that front-end developers need to face.",
+      "createdBy": "dq",
+      "info": {
+        "category": "Web Development",
+        "link": "https://github.com/dwqs/front-end-handbook",
+        "published": "2015"
+      }
+    },
+    {
+      "id": "aa79",
+      "title": "The JS Way",
+      "type": "Book",
+      "level": "Beginner",
+      "description": "This repository contains the English source files for The JavaScript Way book.\n\nYou may browse its content here, but a nicer alternative is the online version which is free to read.\n\nThis book is also available on Leanpub (PDF, EPUB), Amazon (Kindle, paperback) and Educative (interactive course).",
+      "createdBy": "thejsway",
+      "info": {
+        "category": "Web Development",
+        "link": "https://github.com/thejsway/thejsway",
+        "published": "2017-01-01"
+      }
+    },
+    {
+      "id": "22e9",
+      "title": "The Odin Project",
+      "type": "Website",
+      "level": "Everyone",
+      "description": "The Odin Project is one of those \"What I wish I had when I was learning\" resources. Not everyone has access to a computer science education or the funds to attend an intensive coding school and neither of those is right for everyone anyway. This project is designed to fill in the gap for people who are trying to hack it on their own but still want a high quality education.",
+      "createdBy": "Erik Trautman",
+      "info": {
+        "category": "Web Development",
+        "link": "https://www.theodinproject.com/",
+        "published": "2013"
+      }
+    }
+  ]
+}
