@@ -14,11 +14,13 @@ export const AuthProvider = ({ children }) => {
           credentials: 'include',
         })
         const data = await res.json()
+        localStorage.setItem('user', JSON.stringify(data))
         setUser(data)
       } catch (err) {
         console.error('Error fetching user:', err)
         setUser(null)
       } finally {
+        setUser(JSON.parse(localStorage.getItem('user')))
         setLoading(false)
       }
     }

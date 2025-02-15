@@ -1,102 +1,111 @@
-import logo from "../assets/images/logo inverse.png";
+import { useState } from "react";
 import { FaGoogle } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import Card from "./Card";
+import logo from "../../../assets/Study Space logo.png";
+
 const VITE_BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:8080";
 
-const handleGoogleSignIn = () => {
-  window.location.href = `${VITE_BASE_URL}/auth/google`;
-};
-
 const Login = () => {
-  return (
-    <>
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-        <Card bg="bg-red-50">
-          <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-            <img
-              alt="Study Space Logo"
-              src={logo}
-              className="mx-auto h-32 w-auto "
-            />
-            <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
-              Sign in to your account or sign up below
-            </h2>
-          </div>
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    const navigate = useNavigate();
 
-          <div className="flex justify-center flex-row">
-            <button
-              onClick={handleGoogleSignIn}
-              className="bg-red-500 hover:bg-red-400 text-white font-bold mt-10 py-4 px-28 sm:px-40 rounded-lg shadow-md transition duration-300 text-center flex items-center justify-center space-x-2"
-            >
-              <FaGoogle className="text-2xl mr-3" />
-              Google
-            </button>
-          </div>
-        </Card>
+    const handleGoogleSignIn = () => {
+        window.location.href = `${VITE_BASE_URL}/auth/google/callback`;
+    };
 
-        {/*ANCHOR: for future local auth login */}
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        setError(""); // Clear previous errors
 
-        {/* <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <form action="#" method="POST" className="space-y-6">
-                        <div>
-                            <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
-                                Email address
-                            </label>
-                            <div className="mt-2">
-                                <input
-                                    id="email"
-                                    name="email"
-                                    type="email"
-                                    required
-                                    autoComplete="email"
-                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                                />
-                            </div>
-                        </div>
+        try {
+            const response = await fetch(`${VITE_BASE_URL}/auth/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password }),
+            });
 
-                        <div>
-                            <div className="flex items-center justify-between">
-                                <label htmlFor="password" className="block text-sm/6 font-medium text-gray-900">
-                                    Password
-                                </label>
-                                <div className="text-sm">
-                                    <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                                        Forgot password?
-                                    </a>
-                                </div>
-                            </div>
-                            <div className="mt-2">
-                                <input
-                                    id="password"
-                                    name="password"
-                                    type="password"
-                                    required
-                                    autoComplete="current-password"
-                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                                />
-                            </div>
-                        </div>
+            if (response.ok) {
+                const data = await response.json();
+                localStorage.setItem("token", data.token);
+                localStorage.setItem("user", JSON.stringify(data.data)); // Store user data in local storage
+                navigate("/dashboard"); // Redirect to dashboard
+            } else {
+                const errorMsg = await response.text();
+                setError(errorMsg || "Failed to login. Please try again.");
+            }
+        } catch (err) {
+            setError("Something went wrong. Please try again later.");
+        }
+    };
 
-                        <div>
-                            <button
-                                type="submit"
-                                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                            >
-                                Sign in
-                            </button>
-                        </div>
-                    </form>
+    return (
+        <div className="flex min-h-screen items-center justify-center bg-gray-100">
+            <Card bg="bg-white shadow-lg p-10 rounded-lg">
+                <div className="text-center">
+                    <img src={logo} alt="Study Space Logo" className="mx-auto h-24" />
+                    <h2 className="mt-5 text-2xl font-bold text-gray-900">Sign in to your account</h2>
+                </div>
 
-                    <p className="mt-10 text-center text-sm/6 text-gray-500">
-                        Not a member?{' '}
-                        <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                            Start a 14 day free trial
-                        </a>
-                    </p>
-                </div> */}
-      </div>
-    </>
-  );
+                <div className="mt-6 flex justify-center">
+                    <button
+                        onClick={handleGoogleSignIn}
+                        className="btn btn-error btn-wide text-white flex items-center gap-2"
+                    >
+                        <FaGoogle className="text-xl" />
+                        Sign in with Google
+                    </button>
+                </div>
+
+                <div className="divider">OR</div>
+
+                <form onSubmit={handleLogin} className="space-y-4">
+                    {error && <p className="text-red-500 text-sm">{error}</p>}
+
+                    <div>
+                        <label className="label">
+                            <span className="label-text">Email</span>
+                        </label>
+                        <input
+                            type="email"
+                            placeholder="Enter your email"
+                            className="input input-bordered w-full"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <div>
+                        <label className="label">
+                            <span className="label-text">Password</span>
+                        </label>
+                        <input
+                            type="password"
+                            placeholder="Enter your password"
+                            className="input input-bordered w-full"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <button type="submit" className="btn btn-primary w-full">
+                        Sign In
+                    </button>
+                </form>
+
+                <p className="mt-4 text-center text-sm text-gray-500">
+                    Not a member?{" "}
+                    <a href="#" className="text-blue-500 hover:underline">
+                        Sign up here
+                    </a>
+                </p>
+            </Card>
+        </div>
+    );
 };
 
 export default Login;
