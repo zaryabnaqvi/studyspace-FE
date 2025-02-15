@@ -5,7 +5,7 @@ A full-stack MERN application that helps developers share and discover education
 Made for educators to share valuable coding tools, guides, and materials, and for learners to browse and discover the best resources to enhance their coding skills.
 
 
-![](assets/20250106_032040_image.png)
+![studyspace](studyspace.png)
 
 
 ## **Features**
