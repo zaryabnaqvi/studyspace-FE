@@ -12,7 +12,7 @@ const MyResourcesPage = () => {
     useEffect(() => {
         const fetchMyResources = async () => {
             try {
-                const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/resources/user/${user._id}`, {
+                const response = await fetch(`${import.meta.env.VITE_BASE_URL}/resources/user/${user._id}`, {
                     credentials: 'include'
                 })
                 if (!response.ok) {
