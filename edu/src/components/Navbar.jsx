@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import UserNav from "./UserNav";
 import { useAuth } from "../context/AuthContext";
-
+import logo from "../../../assets/Study Space logo.png";
 const Navbar = () => {
   const linkClass = ({ isActive }) =>
     isActive
@@ -61,11 +61,7 @@ const Navbar = () => {
             className="flex flex-shrink-0 items-center mr-4 lg:ml-16"
             to="/"
           >
-            {/* TODO:// add study space logo */}
-            {/* <img
-              className="h-16 w-auto"
-              src={logo}
-            /> */}
+            <img className="h-16 w-auto rounded-full" src={logo} />
             <span className="hidden md:block text-white text-3xl font-bold italic ml-4 uppercase">
               Study Space
             </span>
