@@ -16,7 +16,7 @@ const Login = () => {
   const { setUser } = useAuth();
 
   const handleGoogleSignIn = () => {
-    window.location.href = `${VITE_BASE_URL}/auth/google/callback`;
+    window.location.href = `${VITE_BASE_URL}/auth/google`;
   };
 
   const handleLogin = async (e) => {
