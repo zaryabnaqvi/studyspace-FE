@@ -44,7 +44,7 @@ const AddCollectionPage = ({ addCollectionSubmit }) => {
     if (!validateForm()) return;
 
     const newCollection = {
-      title,
+      title:title,
       description,
       visibility,
       tags: tags.split(",").map((tag) => tag.trim()).filter(Boolean),
@@ -53,7 +53,7 @@ const AddCollectionPage = ({ addCollectionSubmit }) => {
     try {
       await addCollectionSubmit(newCollection);
       toast.success("Collection added successfully!");
-      navigate("/collections");
+      navigate("/dashboard");
     } catch (err) {
       toast.error("Failed to add collection");
       console.error("Error adding collection: ", err);

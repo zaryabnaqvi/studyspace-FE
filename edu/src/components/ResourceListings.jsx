@@ -25,15 +25,15 @@ const ResourceListings = ({ isHome = false }) => {
     const fetchResources = async () => {
       try {
         const apiUrl = isHome
-          ? `${VITE_BASE_URL}/resources?limit=6`
-          : `${VITE_BASE_URL}/resources?limit=1000` // Fetch all resources for client-side filtering
+          ? `${VITE_BASE_URL}/resource/getAll?limit=6`
+          : `${VITE_BASE_URL}/resource/getAll` // Fetch all resources for client-side filtering
 
         const res = await fetch(apiUrl, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
           },
-          credentials: 'include'
+         
         })
 
         if (!res.ok) {
@@ -41,8 +41,8 @@ const ResourceListings = ({ isHome = false }) => {
         }
 
         const data = await res.json()
-        setAllResources(data.resources)
-        setResources(data.resources)
+        setAllResources(data.data)
+        setResources(data.data)
       } catch (err) {
         console.error('Error fetching data:', err)
         setError(`Error fetching resources: ${err.message}`)

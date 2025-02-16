@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 // er;
 // }
 
-const VITE_BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:8080";
+const VITE_BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:8080/api";
 
 function Dashboard() {
     const {user} = useAuth()
@@ -160,7 +160,7 @@ function Dashboard() {
                   }
                   </div>
                   <div className="card-actions justify-end mt-4">
-                    <button className="btn btn-sm btn-outline">View Details</button>
+                    <button onClick={()=>navigate(`/collection/${collection._id}`)} className="btn btn-sm btn-outline">View Details</button>
                   </div>
                 </div>
               </div>

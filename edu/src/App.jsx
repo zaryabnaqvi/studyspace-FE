@@ -1,4 +1,4 @@
-import { Route, createRoutesFromElements, createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { Route, createRoutesFromElements, createBrowserRouter, RouterProvider, useParams } from 'react-router-dom'
 import Login from './components/Login'
 import MainLayout from './layouts/MainLayout'
 import HomePage from './pages/HomePage'
@@ -13,6 +13,7 @@ import { useAuth } from './context/AuthContext'
 import Dashboard from './pages/Dashboard'
 import AddCollectionPage from './pages/AddCollectionPage'
 import EditCollectionPage from './pages/EditCollectionPage'
+import { CollectionDetails } from './pages/CollectionDetails'
 
 
 const VITE_API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
@@ -21,6 +22,7 @@ const VITE_API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api'
 const App = () => {
 
   const { user } = useAuth()
+  const {collectionId}=useParams()
 
   //^RESOURCE FUNCTIONS
   //! Add a Resource
@@ -29,12 +31,13 @@ const App = () => {
       const res = await fetch(`${VITE_API_URL}/resource/new`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("token")}`
         },
-        credentials: 'include',
+        // credentials: 'include',
         body: JSON.stringify({
           ...newResource,
-          user: user._id
+
         })
       })
 
@@ -52,14 +55,14 @@ const App = () => {
 
   const addCollection = async (newCollection) => {
     try {
-      const res = await fetch(`${VITE_API_URL}/collection/new.`, {
+      const res = await fetch(`${VITE_API_URL}/collection/new`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem("token")}`
         },
-        credentials: 'include',
-        body: JSON.stringify({newCollection})
+        // credentials: 'include',
+        body: JSON.stringify(newCollection)
       })
 
       if (!res.ok) {
@@ -146,7 +149,7 @@ const App = () => {
         <Route path='/resources' element={<ResourcesPage />} />
 
         {/* Protected Routes, can only access them once logged in. */}
-        <Route path='/add-resources' element={
+        <Route path='/add-resources/:collectionId' element={
           //* Protected
           // <ProtectedRoute user={user}>
             <AddResourcePage addResourceSubmit={addResource} />
@@ -158,6 +161,14 @@ const App = () => {
           //* Protected
           // <ProtectedRoute user={user}>
             <AddCollectionPage addCollectionSubmit={addCollection} />
+          // </ProtectedRoute>
+        }
+        />
+
+<Route path='/collection/:id' element={
+          //* Protected
+          // <ProtectedRoute user={user}>
+            <CollectionDetails />
           // </ProtectedRoute>
         }
         />
@@ -193,6 +204,7 @@ const App = () => {
           </ProtectedRoute>
         }
         />
+
       {/* Protected Routes end above */}
 
         <Route path='/resource/:id' element={

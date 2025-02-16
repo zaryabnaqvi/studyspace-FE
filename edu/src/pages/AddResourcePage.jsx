@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const AddResourcePage = ({
@@ -16,6 +16,7 @@ const AddResourcePage = ({
   const [published, setPublished] = useState("N/A");
 
   const navigate = useNavigate();
+  const {collectionId}=useParams()
 
   const submitForm = async (e) => {
     e.preventDefault();
@@ -31,6 +32,7 @@ const AddResourcePage = ({
         link,
         published,
       },
+      collectionId:collectionId
     };
 
     try {
@@ -38,7 +40,7 @@ const AddResourcePage = ({
 
       toast.success("Resource added successfully!");
 
-      return navigate("/resources");
+      return navigate(-1);
     } catch (err) {
       toast.error("Failed to add resource");
       console.error("Error adding resource: ", err);

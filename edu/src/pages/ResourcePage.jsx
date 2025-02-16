@@ -159,14 +159,17 @@ const ResourcePage = ({ deleteResource }) => {
 
 const resourceLoader = async ({ params }) => {
     try {
-        const res = await fetch(`${VITE_API_URL}/resources/${params.id}`, {
-            credentials: 'include'
+        const res = await fetch(`${VITE_API_URL}/resource/getById/${params.id}`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }  // Auth cookies
+            
         }) // Auth cookies
         if (!res.ok) {
             throw new Error('Failed to fetch resource')
         }
         const data = await res.json()
-        return data
+        return data.data
     } catch (error) {
         console.error('Error loading resource:', error)
         throw error
