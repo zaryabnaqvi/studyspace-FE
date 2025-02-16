@@ -14,33 +14,34 @@ const AddResourcePage = ({
   const [category, setCategory] = useState("Web Development");
   const [link, setLink] = useState("");
   const [published, setPublished] = useState("N/A");
+  const [file, setFile] = useState(null); // New state for file input
 
   const navigate = useNavigate();
-  const {collectionId}=useParams()
+  const { collectionId } = useParams();
 
   const submitForm = async (e) => {
     e.preventDefault();
 
-    const newResource = {
-      title,
-      type,
-      level,
-      description,
-      createdBy,
-      info: {
-        category,
-        link,
-        published,
-      },
-      collectionId:collectionId
-    };
+    // Creating FormData to handle text and file inputs
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("type", type);
+    formData.append("level", level);
+    formData.append("description", description);
+    formData.append("createdBy", createdBy);
+    formData.append("[info][category]", category);
+    formData.append("[info][link]", link);
+    formData.append("[info][published]", published);
+    formData.append("collectionId", collectionId);
+
+    if (file) {
+      formData.append("file", file); // Append file if exists
+    }
 
     try {
-      await addResourceSubmit(newResource);
-
+      await addResourceSubmit(formData); // Ensure `addResourceSubmit` handles FormData
       toast.success("Resource added successfully!");
-
-      return navigate(-1);
+      navigate(-1);
     } catch (err) {
       toast.error("Failed to add resource");
       console.error("Error adding resource: ", err);
@@ -51,18 +52,15 @@ const AddResourcePage = ({
     <section>
       <div className="container m-auto max-w-2xl py-24">
         <div className="bg-white text-black px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0">
-          <form onSubmit={submitForm}>
-            <h2 className="text-3xl text-center font-semibold mb-6 {bg}">
+          <form onSubmit={submitForm} encType="multipart/form-data">
+            <h2 className="text-3xl text-center font-semibold mb-6">
               Add a Resource
             </h2>
 
+            {/* Resource Type */}
             <div className="mb-4">
-              <label
-                htmlFor="type"
-                className="block text-gray-700 font-bold mb-2"
-              >
-                Resource Type{" "}
-                <span className="text-xs text-red-600"> *required</span>
+              <label htmlFor="type" className="block text-gray-700 font-bold mb-2">
+                Resource Type <span className="text-xs text-red-600"> *required</span>
               </label>
               <select
                 id="type"
@@ -83,29 +81,41 @@ const AddResourcePage = ({
               </select>
             </div>
 
+            {/* Resource Name */}
             <div className="mb-4">
               <label className="block text-gray-700 font-bold mb-2">
-                Resource Name{" "}
-                <span className="text-xs text-red-600"> *required</span>
+                Resource Name <span className="text-xs text-red-600"> *required</span>
               </label>
               <input
                 type="text"
                 id="title"
                 name="title"
                 className={`border rounded w-full py-2 px-3 mb-2 ${bg}`}
-                placeholder="eg. JavaScript for Dummies"
+                placeholder="e.g., JavaScript for Dummies"
                 required
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
             </div>
+
+            {/* File Upload */}
             <div className="mb-4">
-              <label
-                htmlFor="description"
-                className="block text-gray-700 font-bold mb-2"
-              >
-                Description{" "}
-                <span className="text-xs text-red-600"> *required</span>
+              <label className="block text-gray-700 font-bold mb-2">
+                Upload File <span className="text-xs text-gray-500"> (optional)</span>
+              </label>
+              <input
+                type="file"
+                id="file"
+                name="file"
+                className={`border rounded w-full py-2 px-3 ${bg}`}
+                onChange={(e) => setFile(e.target.files[0])}
+              />
+            </div>
+
+            {/* Description */}
+            <div className="mb-4">
+              <label htmlFor="description" className="block text-gray-700 font-bold mb-2">
+                Description <span className="text-xs text-red-600"> *required</span>
               </label>
               <textarea
                 id="description"
@@ -113,35 +123,33 @@ const AddResourcePage = ({
                 className={`border rounded w-full py-2 px-3 ${bg}`}
                 rows="4"
                 placeholder="Briefly describe the resource"
+                required
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>
             </div>
 
+            {/* Created By */}
             <div className="mb-4">
               <label className="block text-gray-700 font-bold mb-2">
-                Created By{" "}
-                <span className="text-xs text-red-600"> *required</span>
+                Created By <span className="text-xs text-red-600"> *required</span>
               </label>
               <input
                 type="text"
                 id="createdBy"
                 name="createdBy"
                 className={`border rounded w-full py-2 px-3 mb-2 ${bg}`}
-                placeholder="Who created this resource? Can be a username, real name, etc."
+                placeholder="Who created this resource?"
                 required
                 value={createdBy}
                 onChange={(e) => setcreatedBy(e.target.value)}
               />
             </div>
 
+            {/* Resource Level */}
             <div className="mb-4">
-              <label
-                htmlFor="type"
-                className="block text-gray-700 font-bold mb-2"
-              >
-                Resource Level{" "}
-                <span className="text-xs text-red-600"> *required</span>
+              <label htmlFor="level" className="block text-gray-700 font-bold mb-2">
+                Resource Level <span className="text-xs text-red-600"> *required</span>
               </label>
               <select
                 id="level"
@@ -158,93 +166,40 @@ const AddResourcePage = ({
               </select>
             </div>
 
-            <h3 className="text-2xl mb-5">Additional Resource Info</h3>
-
+            {/* Resource Link */}
             <div className="mb-4">
-              <label
-                htmlFor="company"
-                className="block text-gray-700 font-bold mb-2"
-              >
-                Resource Category{" "}
-                <span className="text-xs text-red-600"> *required</span>
-              </label>
-              <select
-                id="category"
-                name="category"
-                className={`border rounded w-full py-2 px-3 ${bg}`}
-                required
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-              >
-                <option value="Web Development">Web Development</option>
-                <option value="Mobile Development">Mobile Development</option>
-                <option value="Game Development">Game Development</option>
-                <option value="Data Science">Data Science</option>
-                <option value="Cloud Computing">Cloud Computing</option>
-                <option value="DevOps">DevOps</option>
-                <option value="Cybersecurity">Cybersecurity</option>
-                <option value="Artifical Intelligence">
-                  Artifical Intelligence
-                </option>
-                <option value="Data Structures and Algorithms">
-                  Data Structures and Algorithms
-                </option>
-                <option value="Machine Learning">Machine Learning</option>
-                <option value="Database Management">Database Management</option>
-                <option value="Agile and Scrum">Agile and Scrum</option>
-                <option value="Career Development">Career Development</option>
-                <option value="General Skills">General Skills</option>
-                <option value="Business and Entrepreneurship">
-                  Business and Entrepreneurship
-                </option>
-                <option value="Marketing">Marketing</option>
-                <option value="Product Management">Product Management</option>
-                <option value="Blockchain and Cryptocurrencies">
-                  Blockchain and Cryptocurrencies
-                </option>
-                <option value="Design">Design</option>
-                <option value="Networking">Networking</option>
-              </select>
-            </div>
-
-            <div className="mb-4">
-              <label
-                htmlFor="company"
-                className="block text-gray-700 font-bold mb-2"
-              >
-                Resource Link{" "}
-                <span className="text-xs text-red-600"> *required</span>
+              <label className="block text-gray-700 font-bold mb-2">
+                Resource Link <span className="text-xs text-red-600"> *required</span>
               </label>
               <input
                 type="text"
-                id="category"
-                name="category"
+                id="link"
+                name="link"
                 className={`border rounded w-full py-2 px-3 ${bg}`}
-                placeholder="Resource Link"
+                placeholder="Enter the resource link"
+                required
                 value={link}
                 onChange={(e) => setLink(e.target.value)}
               />
             </div>
 
+            {/* Publishing Year */}
             <div className="mb-4">
-              <label
-                htmlFor="contact_phone"
-                className="block text-gray-700 font-bold mb-2"
-              >
-                Publishing Year{" "}
-                <span className="text-xs text-gray-500"> (optional)</span>
+              <label className="block text-gray-700 font-bold mb-2">
+                Publishing Year <span className="text-xs text-gray-500"> (optional)</span>
               </label>
               <input
                 type="number"
                 id="published"
                 name="published"
                 className={`border rounded w-full py-2 px-3 ${bg}`}
-                placeholder="Enter the year this resource was initally published"
+                placeholder="Enter the publishing year"
                 value={published}
                 onChange={(e) => setPublished(e.target.value)}
               />
             </div>
 
+            {/* Submit Button */}
             <div>
               <button
                 className="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"

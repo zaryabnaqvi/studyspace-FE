@@ -107,6 +107,20 @@ const ResourcePage = ({ deleteResource }) => {
                                     {resource.description}
                                 </p>
                             </div>
+
+                            <div>
+                                {/* download resources button*/}
+                                <a 
+  href={resource.contentUrl} 
+  target="_blank" 
+  rel="noopener noreferrer" 
+  download="resource-file.pdf" 
+  className="btn btn-primary"
+>
+  Download
+</a>
+
+                            </div>
                             
                             <div>
                                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
@@ -127,24 +141,24 @@ const ResourcePage = ({ deleteResource }) => {
                                     <div className="flex items-center text-gray-900 mb-2">
                                         <h4 className="font-medium">Category</h4>
                                     </div>
-                                    <p className="text-gray-600">{resource.info.category}</p>
+                                    <p className="text-gray-600">{resource?.info?.category}</p>
                                 </div>
 
                                 <div>
                                     <h4 className="font-medium text-gray-900 mb-2">Link</h4>
                                     <Link 
-                                        to={resource.info.link} 
+                                        to={resource?.info?.link} 
                                         target="_blank" 
                                         className="text-red-500 hover:text-red-600 break-words transition duration-200"
                                     >
-                                        {resource.info.link}
+                                        {resource?.info?.link}
                                     </Link>
                                 </div>
 
                                 <div>
                                     <h4 className="font-medium text-gray-900 mb-2">Published</h4>
                                     <span className="inline-block bg-red-50 text-red-600 px-3 py-1 rounded-md text-sm font-medium">
-                                        {resource.info.published}
+                                        {resource?.info?.published}
                                     </span>
                                 </div>
                             </div>

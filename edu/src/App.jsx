@@ -31,27 +31,23 @@ const App = () => {
       const res = await fetch(`${VITE_API_URL}/resource/new`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem("token")}`
         },
-        // credentials: 'include',
-        body: JSON.stringify({
-          ...newResource,
-
-        })
-      })
-
+        body: newResource // Pass FormData directly
+      });
+  
       if (!res.ok) {
-        throw new Error('Failed to add resource')
+        throw new Error('Failed to add resource');
       }
-
+  
       const data = await res.json();
-      return data
+      return data;
     } catch (error) {
       console.error('Error adding resource:', error);
       throw error;
     }
-  }
+  };
+  
 
   const addCollection = async (newCollection) => {
     try {

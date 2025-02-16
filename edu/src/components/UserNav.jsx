@@ -37,6 +37,7 @@ const UserNav = () => {
           </Link>
           <button
             onClick={() => {
+                navigate("/")
               signOut();
               setIsOpen(false);
             }}

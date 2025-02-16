@@ -79,11 +79,6 @@ const Navbar = () => {
                 Resources
               </NavLink>
             </li>
-            <li>
-              <NavLink to="/add-resources" className={linkClass}>
-                Add Resources
-              </NavLink>
-            </li>
           </ul>
         </div>
         <div className="sm:mr-4 lg:mr-16 navbar-end">
