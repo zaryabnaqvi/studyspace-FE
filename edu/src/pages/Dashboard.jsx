@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FolderPlus, Book, Github, Star, MapPin, Link2, Briefcase, Users, Building2 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 // interface Collection {
 //   id: number;
@@ -14,6 +15,7 @@ const VITE_BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:8080";
 
 function Dashboard() {
     const {user} = useAuth()
+    const navigate = useNavigate()
   const [collections, setCollections] = useState([
     {
       id: 1,
@@ -127,7 +129,7 @@ function Dashboard() {
             <h1 className="text-3xl font-bold">My Collections</h1>
             <button 
               className="btn btn-primary"
-              onClick={() => setIsModalOpen(true)}
+              onClick={()=>navigate("/add-collection")}
             >
               <FolderPlus className="w-5 h-5 mr-2" />
               New Collection
@@ -168,7 +170,7 @@ function Dashboard() {
       </div>
 
       {/* Add Collection Modal */}
-      {isModalOpen && (
+      {/* {isModalOpen && (
         <div className="modal modal-open">
           <div className="modal-box">
             <h3 className="font-bold text-lg mb-4">Create New Collection</h3>
@@ -212,7 +214,7 @@ function Dashboard() {
           </div>
           <div className="modal-backdrop" onClick={() => setIsModalOpen(false)}></div>
         </div>
-      )}
+      )} */}
     </div>
   );
 }
