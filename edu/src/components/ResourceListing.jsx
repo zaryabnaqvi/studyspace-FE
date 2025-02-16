@@ -67,6 +67,7 @@ const ResourceListing = ({ resources }) => {
           >
             Read More
           </Link>
+          {/* {JSON.stringify(resources._id)} */}
         </div>
       </div>
     </div>

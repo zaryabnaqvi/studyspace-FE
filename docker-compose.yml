@@ -13,8 +13,8 @@ services:
       - GOOGLE_CLIENT_ID=126043924205-0a6cf2igeg6etogf0a165sbfemu7nap7.apps.googleusercontent.com
       - GOOGLE_CLIENT_SECRET=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
       - GOOGLE_CALLBACK_URL=http://localhost:8080/api/auth/google/callback
-    depends_on:
-      - mongo
+    # depends_on:
+    #   - mongo
 
   frontend:
     build:
@@ -25,14 +25,14 @@ services:
     depends_on:
       - backend
 
-  mongo:
-    image: mongo:6
-    container_name: mongo_container
-    restart: always
-    volumes:
-      - mongo-data:/data/db
-    ports:
-      - "27017:27017"
+#   mongo:
+#     image: mongo:6
+#     container_name: mongo_container
+#     restart: always
+#     volumes:
+#       - mongo-data:/data/db
+#     ports:
+#       - "27017:27017"
 
-volumes:
-  mongo-data:
+# volumes:
+#   mongo-data:

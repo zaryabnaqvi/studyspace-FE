@@ -20,26 +20,22 @@ const ResourceListings = ({ isHome = false }) => {
     category: "",
   });
 
+  // console.log(resources);
   //hello world how are you...? yes we are typing like madmen
 
   useEffect(() => {
     const fetchResources = async () => {
       try {
         const apiUrl = isHome
-
           ? `${VITE_BASE_URL}/resource/getAll?limit=6`
-          : `${VITE_BASE_URL}/resource/getAll` // Fetch all resources for client-side filtering
-
+          : `${VITE_BASE_URL}/resource/getAll`; // Fetch all resources for client-side filtering
 
         const res = await fetch(apiUrl, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
-
-         
-        })
-
+        });
 
         if (!res.ok) {
           throw new Error(
@@ -47,11 +43,9 @@ const ResourceListings = ({ isHome = false }) => {
           );
         }
 
-
-        const data = await res.json()
-        setAllResources(data.data)
-        setResources(data.data)
-
+        const data = await res.json();
+        setAllResources(data.data);
+        setResources(data.data);
       } catch (err) {
         console.error("Error fetching data:", err);
         // setError(`Error fetching resources: ${err.message}`);
@@ -70,7 +64,8 @@ const ResourceListings = ({ isHome = false }) => {
         return (
           (!filters.type || resource.type === filters.type) &&
           (!filters.level || resource.level === filters.level) &&
-          (!filters.category || resource.info.category === filters.category)
+          (!filters.category ||
+            (resource.info && resource.info.category === filters.category))
         );
       });
 

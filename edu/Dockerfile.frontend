@@ -6,13 +6,11 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
-RUN npm run build
+RUN npm run build  
 
 # Production Stage
 FROM nginx:alpine
-COPY --from=build /usr/src/app/build /usr/share/nginx/html
+COPY --from=build /usr/src/app/dist /usr/share/nginx/html
 
-# Expose the frontend port
 EXPOSE 4444
-
 CMD ["nginx", "-g", "daemon off;"]
