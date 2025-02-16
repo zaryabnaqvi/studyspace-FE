@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Card from "./Card";
 import logo from "../../../assets/Study Space logo.png";
 
-const VITE_BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:8080";
+const VITE_BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:8080/api";
 
 const Login = () => {
     const [email, setEmail] = useState("");

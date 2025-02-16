@@ -55,7 +55,8 @@ const App = () => {
       const res = await fetch(`${VITE_API_URL}/collection/new.`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("token")}`
         },
         credentials: 'include',
         body: JSON.stringify({newCollection})
