@@ -1,13 +1,15 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useAuthActions } from "../hooks/useAuthActions";
 import { FaUserCircle } from "react-icons/fa";
 
 const UserNav = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user } = useAuth();
+  const { user,setUser } = useAuth();
   const { signOut } = useAuthActions();
+  const navigate = useNavigate();
+
 
   return (
     <div className="relative">
@@ -37,7 +39,11 @@ const UserNav = () => {
           </Link>
           <button
             onClick={() => {
-                navigate("/")
+                localStorage.removeItem("token");
+                localStorage.removeItem("user");
+
+                setUser(null)
+                navigate("/login")
               signOut();
               setIsOpen(false);
             }}

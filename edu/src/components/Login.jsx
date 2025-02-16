@@ -3,14 +3,17 @@ import { FaGoogle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Card from "./Card";
 import logo from "../../../assets/Study Space logo.png";
+import { useAuth } from "../context/AuthContext";
 
 const VITE_BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:8080/api";
 
 const Login = () => {
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
+    const {setUser}=useAuth()
 
     const handleGoogleSignIn = () => {
         window.location.href = `${VITE_BASE_URL}/auth/google/callback`;
@@ -30,6 +33,7 @@ const Login = () => {
             if (response.ok) {
                 const data = await response.json();
                 localStorage.setItem("token", data.token);
+                setUser(data.data)
                 localStorage.setItem("user", JSON.stringify(data.data)); // Store user data in local storage
                 navigate("/dashboard"); // Redirect to dashboard
             } else {

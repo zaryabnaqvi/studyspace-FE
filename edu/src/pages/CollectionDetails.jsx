@@ -54,20 +54,7 @@ export function CollectionDetails({ onUpdateCollection }) {
       console.error('Error fetching collection:', error);
     }
   }
-  const [resources,setResources] = useState([
-    {
-      id: 1,
-      title: "React Documentation",
-      url: "https://react.dev",
-      description: "Official React documentation"
-    },
-    {
-      id: 2,
-      title: "TypeScript Handbook",
-      url: "https://www.typescriptlang.org/docs/",
-      description: "The official TypeScript documentation"
-    }
-  ]);
+  const [resources,setResources] = useState([]);
 
   useEffect(()=>{
     fetchCollectionAndResource()

@@ -24,14 +24,20 @@ const AddResourcePage = ({
 
     // Creating FormData to handle text and file inputs
     const formData = new FormData();
+    const info = {
+      category,
+      link,
+      published
+  };
+  
+  // Append the entire object as a JSON string
+  formData.append("info", JSON.stringify(info));
     formData.append("title", title);
     formData.append("type", type);
     formData.append("level", level);
     formData.append("description", description);
     formData.append("createdBy", createdBy);
-    formData.append("[info][category]", category);
-    formData.append("[info][link]", link);
-    formData.append("[info][published]", published);
+   
     formData.append("collectionId", collectionId);
 
     if (file) {

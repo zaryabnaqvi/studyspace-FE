@@ -34,7 +34,7 @@ const ResourcePage = ({ deleteResource }) => {
         try {
             await deleteResource(resourceId)
             toast.success('Resource deleted successfully!')
-            navigate('/resources')
+            navigate(-1)
         } catch (error) {
             toast.error('Failed to delete resource')
             console.error('Error deleting resource:', error)
