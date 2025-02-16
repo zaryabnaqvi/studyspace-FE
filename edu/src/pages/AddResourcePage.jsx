@@ -19,6 +19,28 @@ const AddResourcePage = ({
   const navigate = useNavigate();
   const { collectionId } = useParams();
 
+  const categoryOptions = [
+    "Web Development",
+    "Mobile Development",
+    "Game Development",
+    "Data Science",
+    "Cloud Computing",
+    "DevOps",
+    "Cybersecurity",
+    "Artifical Intelligence",
+    "Data Structures and Algorithms",
+    "Machine Learning",
+    "Database Management",
+    "Agile and Scrum",
+    "Career Development",
+    "General Skills",
+    "Business and Entrepreneurship",
+    "Marketing",
+    "Product Management",
+    "Blockchain and Cryptocurrencies",
+    "Design",
+    "Networking",
+  ];
   const submitForm = async (e) => {
     e.preventDefault();
 
@@ -31,7 +53,10 @@ const AddResourcePage = ({
   };
   
   // Append the entire object as a JSON string
-  formData.append("info", JSON.stringify(info));
+  formData.append("info[category]", info.category);
+  formData.append("info[link]", info.link);
+  formData.append("info[published]", info.published);
+
     formData.append("title", title);
     formData.append("type", type);
     formData.append("level", level);
@@ -187,6 +212,27 @@ const AddResourcePage = ({
                 value={link}
                 onChange={(e) => setLink(e.target.value)}
               />
+            </div>
+            {/* Category */}
+            
+            <div className="mb-4">
+              <label htmlFor="category" className="block text-gray-700 font-bold mb-2">
+                Category <span className="text-xs text-red-600"> *required</span>
+              </label>
+              <select
+                id="category"
+                name="category"
+                className={`border rounded w-full py-2 px-3 ${bg}`}
+                required
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+              >
+                {categoryOptions.map((option, index) => (
+                  <option key={index} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
             </div>
 
             {/* Publishing Year */}
